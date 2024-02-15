@@ -13,9 +13,7 @@ Willow: Double-semicolon-joined directives will always execute on the same frame
 Willow: to split them across multiple lines in Ink for organization. This is useful for setting up scenes, having characters make remarks or emote midsentence, or for having multiple characters move at once.
 ```
 
-The inkleton maintains a counter of blockers, and will only advance when this counter is zero. It increments this counter itself when choices are available, but anything that needs to stop the story from progressing can increment or decrement this counter.
-
-At runtime, the "Inkleton" (Ink singleton) follows this general algorithm:
+At runtime, the "Inkleton" (Ink singleton) follows this general routine:
 
 ```mermaid
 graph RL;
@@ -28,6 +26,9 @@ Wait-- Unblocked -->ReadLine
 ReadLine-- ChoiceRequired -->EmitChoices
 EmitChoices-->Wait
 ```
+
+The inkleton maintains a counter of blockers, and will only advance when this counter is zero. It increments this counter itself when choices are available, but anything that needs to stop the story from progressing can increment or decrement this counter.
+
 ## Available directives
 
 No directives are available yet, but these are planned.
