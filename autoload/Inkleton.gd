@@ -11,7 +11,8 @@ signal choices(choices: Array)
 signal directive(type: String, content: String, tags: Array[String])
 
 func _ready():
-	story = preload("res://ink/game.ink")
+	block()
+	#story = preload("res://ink/game.ink")
 
 func block():
 	blockers += 1
@@ -32,10 +33,10 @@ func _process(_delta):
 		var directives = this_line.split(";;")
 		print("T: ", tags)
 		for directive in directives:
-			directive = directive.lstrip(" ").rstrip(" ")
+			directive = directive.lstrip(" \r\n").rstrip(" \n\r")
 			var first_colon = directive.find(':')
 			var type = directive.substr(0, first_colon)
-			var body = directive.substr(first_colon+1).lstrip(" ").rstrip(" ")
+			var body = directive.substr(first_colon+1).lstrip(" \r\n").rstrip(" \r\n")
 			print(type,": ",body)
 			emit_signal("directive", type, body)
 		if blockers > 0:

@@ -10,6 +10,7 @@ var last_driver: CharacterDriver
 @export var speed = 250.0
 @export var aspect = 0.75
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
+@export var id = "Actor"
 
 signal changed_driver(old: CharacterDriver, new: CharacterDriver)
 
@@ -63,7 +64,9 @@ func unblock():
 	blockers = max(0, blockers-1)
 
 func move_to(pos: Vector2):
-	for driver in get_children().filter(func(c): c is GoalDriver):
-		driver.goal = pos
-		driver.enabled = true
-	await changed_driver
+	var driver = get_node("GoalDriver")
+	driver.goal = pos
+	driver.enabled = true
+	while driver.enabled:
+		await get_tree().process_frame
+	print("OK")

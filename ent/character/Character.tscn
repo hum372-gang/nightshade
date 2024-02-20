@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ent/character/Character.gd" id="1_g53u1"]
 
-[node name="Character" type="Node2D"]
+[node name="Character" type="Node2D" groups=["Actor"]]
 script = ExtResource("1_g53u1")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

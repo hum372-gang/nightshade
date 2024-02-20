@@ -8,24 +8,41 @@
 
 config_version=5
 
+[addons]
+
+instance_dock/scenes=[{
+"name": "General",
+"scenes": [{
+"scene": "res://ent/landmark/Landmark.tscn"
+}],
+"scroll": 0
+}]
+instance_dock/preview_resolution=Vector2i(64, 64)
+
 [application]
 
 config/name="Nightshade Academy"
-run/main_scene="res://test/test.tscn"
+run/main_scene="res://test/start_test_story.tscn"
 config/features=PackedStringArray("4.2", "C#")
 config/icon="res://icon.png"
 
 [autoload]
 
-Inkleton="*res://ink/Inkleton.gd"
+Inkleton="*res://autoload/Inkleton.gd"
+SceneLoader="*res://autoload/SceneLoader.gd"
+Actors="*res://autoload/Actors.gd"
 
 [dotnet]
 
 project/assembly_name="NightshadeAcademy"
 
+[editor]
+
+movie_writer/movie_file="/home/willow/Code/orphanage/movie.avi"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotInk/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/GodotInk/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [rendering]
 

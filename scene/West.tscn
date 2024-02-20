@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://cq5b621q1hcst"]
 
-[ext_resource type="PackedScene" uid="uid://co2r6wr2k5uc7" path="res://actor/Player.tscn" id="1_5lrut"]
-[ext_resource type="Script" path="res://ent/trigger/Trigger.gd" id="4_fn3wr"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="5_1ddhp"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="6_6feey"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_c64tg"]
+[ext_resource type="Script" path="res://ent/trigger/Trigger.gd" id="4_ff3mv"]
+[ext_resource type="PackedScene" uid="uid://bpca4d6nfb3rr" path="res://ent/trigger/Door.tscn" id="5_1t4uq"]
+[ext_resource type="PackedScene" uid="uid://ddsdl37t8pblo" path="res://ent/landmark/Landmark.tscn" id="5_pa36d"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ii0y4"]
 vertices = PackedVector2Array(625, 548, 406, 544, 409, 544, 173, 391, 329, 342, 543, 335, 520, 523, 192, 511, 151, 455, 1032, 443, 1035, 476, 1030, 476, 1026, 443, 790, 514, 815, 361, 874, 369, 939, 521, 699, 547, 702, 514, 686, 509, 722, 348, 708, 369, 639, 334, 670, 362, 615, 420, 639, 492, 551, 533)
@@ -18,13 +18,13 @@ agent_radius = 20.0
 script/source = "extends Button
 
 func _pressed():
-	%Player/GoalDriver.goal = %goal.global_position
-	%Player/GoalDriver.enabled = true
+	Actors.get_actor(\"P\").get_node(\"GoalDriver\").goal = %goal.global_position
+	Actors.get_actor(\"P\").get_node(\"GoalDriver\").enabled = true
 "
 
 [sub_resource type="Curve2D" id="Curve2D_7iliq"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 122, 456, 0, 0, 0, 0, 1035, 455)
+"points": PackedVector2Array(0, 0, 0, 0, 394, 447, 0, 0, 0, 0, 700, 448)
 }
 point_count = 2
 
@@ -34,14 +34,10 @@ radius = 39.1152
 [node name="test" type="Node2D"]
 
 [node name="White2" type="Polygon2D" parent="."]
-position = Vector2(-353, -48)
+position = Vector2(-354, -47)
 scale = Vector2(1.70356, 1.43017)
 color = Color(0.894118, 0.894118, 0.894118, 1)
-polygon = PackedVector2Array(313, 404, 282, 355, 300, 295, 400, 260, 574, 253, 723, 278, 811, 329, 815, 380, 761, 412, 609, 432, 446, 428)
-
-[node name="Player" parent="." instance=ExtResource("1_5lrut")]
-unique_name_in_owner = true
-position = Vector2(270, 473)
+polygon = PackedVector2Array(313, 404, 282, 355, 300, 295, 400, 260, 537.698, 254.515, 518.913, 390.163, 530.654, 389.464, 558.83, 324.437, 574, 253, 642.294, 264.459, 632.793, 377.578, 656.86, 376.878, 678.579, 271.996, 723, 278, 811, 329, 815, 380, 761, 412, 609, 432, 598.746, 390.163, 619.291, 296.468, 603.442, 294.371, 587.006, 389.464, 579.375, 429.32, 446, 428)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ii0y4")
@@ -56,43 +52,46 @@ offset_bottom = 8.0
 text = "Test automatic movement"
 script = SubResource("GDScript_g1747")
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
-position = Vector2(269.981, 455.838)
-script = ExtResource("5_1ddhp")
-priority_override = false
-priority = 0
-zoom = Vector2(1, 1)
-follow_mode = 4
-follow_target = NodePath("../Player")
-follow_path = NodePath("../Path2D")
-follow_parameters/damping = false
-frame_preview = true
-pixel_perfect = true
-limit/draw_limits = false
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/limit_node_target = NodePath("")
-limit/smoothed = false
-tween_parameters = null
-tween_on_load = true
-inactive_update_mode = 0
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(270, 456)
+position = Vector2(393, 447)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
-script = ExtResource("6_6feey")
+script = ExtResource("3_c64tg")
 
 [node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-1, 0)
 curve = SubResource("Curve2D_7iliq")
 
 [node name="Trigger" type="Area2D" parent="."]
-position = Vector2(1028, 457)
-script = ExtResource("4_fn3wr")
+position = Vector2(1138, 354)
+script = ExtResource("4_ff3mv")
 choice_type = "Exit"
 choice_name = "East"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+[node name="CenterLandmark" parent="." instance=ExtResource("5_pa36d")]
+position = Vector2(381, 437)
+id = "center"
+
+[node name="Door" parent="." instance=ExtResource("5_1t4uq")]
+position = Vector2(1029, 458)
+room = "East"
+block_player_until_available = false
+choice_type = "Exit"
+choice_name = "East"
+
+[node name="Exit" parent="Door" index="0"]
+position = Vector2(2, 1)
+id = "East.Exit"
+
+[node name="Entrance" parent="Door" index="1"]
+position = Vector2(-55, 2)
+id = "East.Entrance"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 shape = SubResource("CircleShape2D_j4h7l")
+
+[node name="Landmark" parent="." instance=ExtResource("5_pa36d")]
+position = Vector2(838, 385)
+id = "chair"
+
+[editable path="Door"]

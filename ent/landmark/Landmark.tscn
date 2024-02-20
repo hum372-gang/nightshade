@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddsdl37t8pblo"]
+
+[ext_resource type="Script" path="res://ent/landmark/Landmark.gd" id="1_eclgh"]
+
+[node name="Landmark" type="Node2D" groups=["Landmark"]]
+script = ExtResource("1_eclgh")

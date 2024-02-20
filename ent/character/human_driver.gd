@@ -1,6 +1,8 @@
 extends CharacterDriver
 class_name HumanCharacterDriver
 
+@export var affected_by_directive = "Controls"
+
 func priority():
 	return 1.0 if control().length() > 0 else 0.0
 

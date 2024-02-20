@@ -3,6 +3,7 @@ class_name GoalDriver
 
 @export var goal = Vector2.INF
 @export var enabled = false
+@export var active_priority = 1.0
 
 func absolute() -> Vector2:
 	var a = character().agent
@@ -11,4 +12,4 @@ func absolute() -> Vector2:
 	return goal if enabled else Vector2.INF
 
 func priority() -> float:
-	return 1 if enabled else 0
+	return active_priority if enabled else 0

@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://co2r6wr2k5uc7"]
+[gd_scene load_steps=7 format=3 uid="uid://co2r6wr2k5uc7"]
 
 [ext_resource type="PackedScene" uid="uid://dccdhsbw8syal" path="res://ent/character/Character.tscn" id="1_6i7e1"]
 [ext_resource type="Texture2D" uid="uid://jj01j4pc7j0" path="res://icon.png" id="2_41yvy"]
 [ext_resource type="Script" path="res://ent/character/human_driver.gd" id="3_u3fe7"]
 [ext_resource type="Script" path="res://ent/character/path_goal_driver.gd" id="4_gutcx"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="5_avbit"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yx2dr"]
 
-[node name="Player" groups=["Player"] instance=ExtResource("1_6i7e1")]
+[node name="Player" groups=["Actor", "Player"] instance=ExtResource("1_6i7e1")]
+id = "P"
 
 [node name="Icon" type="Sprite2D" parent="." index="1"]
 position = Vector2(0, -48)
@@ -19,11 +21,35 @@ script = ExtResource("3_u3fe7")
 
 [node name="GoalDriver" type="Node" parent="." index="3"]
 script = ExtResource("4_gutcx")
+active_priority = 2.0
 
 [node name="TriggerCollision" type="CharacterBody2D" parent="." index="4"]
+unique_name_in_owner = true
 motion_mode = 1
 platform_on_leave = 2
 platform_floor_layers = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerCollision" index="0"]
 shape = SubResource("CircleShape2D_yx2dr")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." index="5"]
+script = ExtResource("5_avbit")
+priority_override = false
+priority = 0
+zoom = Vector2(1, 1)
+follow_mode = 2
+follow_target = NodePath("..")
+follow_parameters/target_offset = Vector2(0, 0)
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = false
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0

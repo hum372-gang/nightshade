@@ -6,7 +6,12 @@ class_name Trigger
 @export var choice_type = "Trigger"
 @export var choice_name = "Default"
 
+var enabled = false;
+
 func _ready():
+	# Wait a little before we start caring about player movements, to prevent
+	# loading zone oscillation
+	await get_tree().create_timer(0.25).timeout
 	body_entered.connect(fire.bind(true))
 	body_exited.connect(fire.bind(false))
 
@@ -18,7 +23,7 @@ func fire(body: Node2D, entered: bool):
 	var player: Character = body.get_parent();
 	if !player.is_in_group("Player"):
 		return
-	if Inkleton.current_choices == []:
+	if Inkleton.current_choices == [] && block_player_until_available:
 		player.block()
 		await Inkleton.choices
 		player.unblock()
