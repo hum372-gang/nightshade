@@ -38,7 +38,7 @@ func _process(_delta):
 			var type = directive.substr(0, first_colon)
 			var body = directive.substr(first_colon+1).lstrip(" \r\n").rstrip(" \r\n")
 			print(type,": ",body)
-			emit_signal("directive", type, body)
+			emit_signal("directive", type, body, tags)
 		if blockers > 0:
 			return
 	var them = story.GetCurrentChoices()

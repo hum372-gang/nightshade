@@ -11,7 +11,7 @@ func _ready():
 func change_scene(_from, _to):
 	actors_present = []
 
-func directive(type: String, body: String):
+func directive(type: String, body: String, tags: PackedStringArray):
 	match type.to_lower():
 		"appears":
 			appears(body)

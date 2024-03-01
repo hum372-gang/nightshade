@@ -7,7 +7,7 @@ signal change_scene(from: String, to: String)
 func _ready():
 	Inkleton.directive.connect(directive)
 
-func directive(type: String, body: String):
+func directive(type: String, body: String, _tags: PackedStringArray):
 	if type.to_lower() != "scene":
 		return
 	if body == current_stage:

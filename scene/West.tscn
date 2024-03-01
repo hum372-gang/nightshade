@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cq5b621q1hcst"]
+[gd_scene load_steps=10 format=3 uid="uid://cq5b621q1hcst"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_c64tg"]
 [ext_resource type="Script" path="res://ent/trigger/Trigger.gd" id="4_ff3mv"]
@@ -31,9 +31,14 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_j4h7l"]
 radius = 39.1152
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2e6s"]
+radius = 42.72
+
 [node name="test" type="Node2D"]
+y_sort_enabled = true
 
 [node name="White2" type="Polygon2D" parent="."]
+z_index = -1
 position = Vector2(-354, -47)
 scale = Vector2(1.70356, 1.43017)
 color = Color(0.894118, 0.894118, 0.894118, 1)
@@ -53,7 +58,6 @@ text = "Test automatic movement"
 script = SubResource("GDScript_g1747")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(393, 447)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("3_c64tg")
@@ -93,5 +97,15 @@ shape = SubResource("CircleShape2D_j4h7l")
 [node name="Landmark" parent="." instance=ExtResource("5_pa36d")]
 position = Vector2(838, 385)
 id = "chair"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(838, 385)
+script = ExtResource("4_ff3mv")
+block_player_until_available = false
+choice_type = "Talk"
+choice_name = "SomeOther"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_e2e6s")
 
 [editable path="Door"]
