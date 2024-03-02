@@ -32,6 +32,7 @@ Inkleton="*res://autoload/Inkleton.gd"
 SceneLoader="*res://autoload/SceneLoader.gd"
 Actors="*res://autoload/Actors.gd"
 DialogueQueue="*res://autoload/DialogueQueue.gd"
+StoryUtil="*res://autoload/StoryUtil.gd"
 
 [dotnet]
 

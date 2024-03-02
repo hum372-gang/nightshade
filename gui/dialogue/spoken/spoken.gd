@@ -65,7 +65,7 @@ func handle_message(actor: String, text: String, _tags: Array[String]):
 		%Button.hide()
 	else:
 		%Button.show()
-	for i in range(len(text)):
+	for i in range(len(text)+1):
 		%RichTextLabel.visible_characters = i
 		await get_tree().process_frame
 	if "remark" in _tags:

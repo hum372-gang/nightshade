@@ -23,6 +23,8 @@ func directive(type: String, body: String, tags: PackedStringArray):
 			moves(body)
 		"act":
 			act(body)
+		"controls":
+			controls(body)
 
 func mk_actor(name: String):
 	var actor: PackedScene = load("res://actor/"+name+".tscn")
@@ -104,3 +106,15 @@ func moves(body: String):
 
 func act(body: String):
 	pass
+
+func controls(body: String):
+	var player = get_actor("P")
+	if !player:
+		return
+	match body.to_lower():
+		"yes", "on", "true":
+			player.unblock()
+		"no", "off", "false":
+			player.block()
+		_:
+			print("Error: weird controls setting")

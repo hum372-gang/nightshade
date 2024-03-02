@@ -5,6 +5,9 @@ class_name GoalDriver
 @export var enabled = false
 @export var active_priority = 1.0
 
+func bypasses_control_setting():
+	return true
+
 func absolute() -> Vector2:
 	var a = character().agent
 	if a.target_position == goal and a.is_navigation_finished():
@@ -12,4 +15,4 @@ func absolute() -> Vector2:
 	return goal if enabled else Vector2.INF
 
 func priority() -> float:
-	return active_priority if enabled else 0
+	return active_priority if enabled else 0.0

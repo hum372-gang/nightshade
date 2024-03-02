@@ -1,6 +1,9 @@
 class_name CharacterDriver
 extends Node
 
+func bypasses_control_setting() -> bool:
+	return false
+
 func priority() -> float:
 	return 0.0
 

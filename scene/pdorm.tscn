@@ -1,0 +1,157 @@
+[gd_scene load_steps=12 format=3 uid="uid://823xafw6t2up"]
+
+[ext_resource type="Texture2D" uid="uid://dwv1qt338px2w" path="res://gfx/stolen/dorm.jpg" id="1_3t3yr"]
+[ext_resource type="PackedScene" uid="uid://bpca4d6nfb3rr" path="res://ent/trigger/Door.tscn" id="2_872rf"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_37p6d"]
+[ext_resource type="PackedScene" uid="uid://ddsdl37t8pblo" path="res://ent/landmark/Landmark.tscn" id="4_x0yas"]
+[ext_resource type="PackedScene" uid="uid://bmfueql7hiill" path="res://ent/interact_handle/interact_handle.tscn" id="5_1i0gl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyt08"]
+size = Vector2(72, 19)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tp3q1"]
+vertices = PackedVector2Array(84, 120, 84, 119, 89, 222, 24, 237, -19, 237, -16, 218, 24, 222, 39, -58, 82, 97, -81, 100, -38, -59, -82, 219, -91, 100, -91, -60, 99, -53, 99, 97, -35, -232, 39, -231)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 0, 2, 6, 5, 9, 10), PackedInt32Array(5, 11, 9), PackedInt32Array(12, 13, 10, 9), PackedInt32Array(14, 15, 8, 7), PackedInt32Array(10, 16, 17, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-45, -243, 49, -241, 49, -67, 109, -63, 109, 107, 93, 107, 94, 119, 99, 232, 34, 232, 34, 248, -31, 247, -28, 228, -93, 230, -91, 110, -101, 110, -101, -71, -48, -69)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5bhua"]
+radius = 80.0562
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_liebr"]
+radius = 80.0562
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdxo7"]
+size = Vector2(211, 168)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbdu0"]
+size = Vector2(211, 168)
+
+[node name="Pdorm" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Dorm" type="Sprite2D" parent="."]
+z_index = -1
+rotation = -1.5708
+texture = ExtResource("1_3t3yr")
+
+[node name="Door" parent="." instance=ExtResource("2_872rf")]
+position = Vector2(1, 239)
+room = "DormHallway"
+block_player_until_available = false
+choice_type = "Exit"
+choice_name = "door"
+
+[node name="Exit" parent="Door" index="0"]
+position = Vector2(1, -8)
+id = "door.exit"
+
+[node name="Entrance" parent="Door" index="1"]
+position = Vector2(1, -33)
+id = "door.enter"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_uyt08")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("3_37p6d")
+
+[node name="center" parent="." instance=ExtResource("4_x0yas")]
+position = Vector2(-2, 90)
+id = "center"
+
+[node name="rbed" parent="." instance=ExtResource("4_x0yas")]
+position = Vector2(123, -192)
+id = "rbed"
+
+[node name="by_rbed" parent="." instance=ExtResource("4_x0yas")]
+position = Vector2(31, -152)
+id = "by_rbed"
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_tp3q1")
+
+[node name="Desk" parent="." instance=ExtResource("5_1i0gl")]
+position = Vector2(-130, 4)
+choice_type = "Inspect"
+choice_name = "desk"
+
+[node name="Label" parent="Desk/Control" index="1"]
+text = "Desk
+"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desk"]
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_5bhua")
+
+[node name="Closet" parent="." instance=ExtResource("5_1i0gl")]
+position = Vector2(-112, 187)
+choice_type = "Inspect"
+choice_name = "closet"
+
+[node name="Label" parent="Closet/Control" index="1"]
+offset_left = 33.0
+offset_top = -12.0
+offset_right = 81.0
+offset_bottom = 11.0
+text = "Closet"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Closet"]
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_5bhua")
+
+[node name="RDesk" parent="." instance=ExtResource("5_1i0gl")]
+position = Vector2(146, 16)
+choice_type = "Inspect"
+choice_name = "rdesk"
+
+[node name="Label" parent="RDesk/Control" index="1"]
+text = "Desk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RDesk"]
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_liebr")
+
+[node name="RoomateInBed" parent="." instance=ExtResource("5_1i0gl")]
+position = Vector2(119, -218)
+choice_type = "Inspect"
+choice_name = "roommate"
+
+[node name="Label" parent="RoomateInBed/Control" index="1"]
+offset_left = -97.0
+offset_top = -26.0
+offset_right = -31.0
+offset_bottom = 23.0
+text = "Sleeping
+Persion"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomateInBed"]
+position = Vector2(-47.5, 23)
+shape = SubResource("RectangleShape2D_cdxo7")
+
+[node name="MyBed" parent="." instance=ExtResource("5_1i0gl")]
+position = Vector2(-97, -214)
+choice_type = "Inspect"
+choice_name = "bed"
+
+[node name="Label" parent="MyBed/Control" index="1"]
+offset_left = 36.0
+offset_top = -23.0
+offset_right = 73.0
+offset_bottom = 26.0
+text = "Your
+Bed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MyBed"]
+position = Vector2(43, 19)
+shape = SubResource("RectangleShape2D_qbdu0")
+
+[editable path="Door"]
+[editable path="Desk"]
+[editable path="Closet"]
+[editable path="RDesk"]
+[editable path="RoomateInBed"]
+[editable path="MyBed"]

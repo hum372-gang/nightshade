@@ -42,8 +42,10 @@ func _process(_delta):
 		if blockers > 0:
 			return
 	var them = story.GetCurrentChoices()
-	choices.emit(them)
+	if !them:
+		return
 	for choice in them:
 		print("> ", choice.Text)
+	choices.emit(them)
 	current_choices = them;
 	block()

@@ -30,14 +30,16 @@ Appears: P center
 TITLE: Test story!
 // If an actor's name is used as a directive, they speak.
 P: Hello, world!
-// If dialogue is tagged as #remark, it will appear in a smaller bubble and won't require player interaction to resolve.
-P: I hope I did OK... #remark
+// Thoughts appear in a smaller bubble and won't require player interaction to resolve.
+// When tagged with async, they don't block.
+Thought: I hope I did OK... #async
 
 -> Test
 =SomeOther
 Controls: no
 SomeOther: Whuh?
 P: Nothing.
+Thought SomeOther: That was strange. #async
 SomeOther: OK!
 Controls: yes
 ->here
@@ -48,6 +50,7 @@ Scene: East
 Enters: P;; Enters: SomeOther bench;; Moves: SomeOther bench;; Act: SomeOther sits
 
 { (not Test2.here): 
+    Thought SomeOther: ..? Oh!
     Camera: focus SomeOther
     SomeOther: Hey {P}!
     P: Hi!

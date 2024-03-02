@@ -20,8 +20,10 @@ func _ready():
 
 func _physics_process(delta):
 	# Update controls
-	if blockers == 0:
-		var driver = get_children().filter(func (c): return c is CharacterDriver)
+	var driver = get_children().filter(func (d):
+		return d is CharacterDriver and not (blockers > 0 and not d.bypasses_control_setting())
+	)
+	if not driver.is_empty():
 		driver.sort_custom(func(a, b): return a.priority()>b.priority())
 		if len(driver)>0:
 			driver = driver[0]
