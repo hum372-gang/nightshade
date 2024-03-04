@@ -1,4 +1,4 @@
-extends CharacterDriver
+extends ActorDriver
 class_name GoalDriver
 
 @export var goal = Vector2.INF
@@ -9,7 +9,7 @@ func bypasses_control_setting():
 	return true
 
 func absolute() -> Vector2:
-	var a = character().agent
+	var a = actor().agent
 	if a.target_position == goal and a.is_navigation_finished():
 		enabled = false
 	return goal if enabled else Vector2.INF

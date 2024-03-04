@@ -14,15 +14,22 @@ func change_scene(_from, _to):
 func directive(type: String, body: String, tags: PackedStringArray):
 	match type.to_lower():
 		"appears":
-			appears(body)
+			var parts = body.split(" ", false, 2)
+			var actor_name = parts[0]
+			var landmark_name = parts[1]
+			appears(actor_name, landmark_name)
 		"enters":
-			enters(body)
+			var parts = body.split(" ", false, 2)
+			var actor_name = parts[0]
+			var landmark_name = parts[1] if len(parts) > 1 else "Landmark"
+			enters(actor_name, landmark_name)
 		"exit":
 			exit(body)
 		"moves":
-			moves(body)
-		"act":
-			act(body)
+			var parts = body.split(" ", false, 2)
+			var actor_name = parts[0]
+			var goal_name = parts[1]
+			moves(actor_name, goal_name)
 		"controls":
 			controls(body)
 
@@ -47,10 +54,7 @@ func get_landmark(name: String) -> Node2D:
 			return landmark
 	return null
 
-func appears(body: String):
-	var parts = body.split(" ", false, 2)
-	var actor_name = parts[0]
-	var landmark_name = parts[1]
+func appears(actor_name: String, landmark_name: String):
 	var landmark = get_landmark(landmark_name)
 	if actor_name in actors_present:
 		get_actor(actor_name).global_position = landmark.global_position
@@ -60,12 +64,9 @@ func appears(body: String):
 	actors_present.push_back(actor_name)
 	get_tree().current_scene.add_child(actor)
 
-func enters(body: String):
-	var parts = body.split(" ", false, 2)
-	var actor_name = parts[0]
+func enters(actor_name: String, landmark_name: String):
 	if actor_name in actors_present:
 		return
-	var fallback = parts[1] if len(parts) > 1 else "Landmark"
 	var door: Door
 	var last_room = actor_positions.get(actor_name, false)
 	if last_room:
@@ -73,12 +74,12 @@ func enters(body: String):
 			if _door.room == last_room:
 				door = _door
 				break;
-	var spawn_point: String = door.get_node("%Exit").id if door else fallback
-	var goal: String = door.get_node("%Entrance").id if door else fallback
+	var spawn_point: String = door.get_node("%Exit").id if door else landmark_name
+	var goal: String = door.get_node("%Entrance").id if door else landmark_name
 	Inkleton.block()
-	appears(actor_name+" "+spawn_point)
+	appears(actor_name, spawn_point)
 	if goal:
-		await moves(actor_name+" "+goal)
+		await moves(actor_name, goal)
 	Inkleton.unblock()
 	pass
 
@@ -91,27 +92,21 @@ func exit(exit_name: String):
 		return
 	var exit: Landmark = door.get_node("%Exit")
 	Inkleton.block()
-	await moves("P "+exit.id)
+	await moves("P", exit.id)
 	Inkleton.unblock()
 
-func moves(body: String):
-	var parts = body.split(" ", false, 2)
-	var actor_name = parts[0]
-	var goal_id = parts[1]
-	var actor: Character = get_actor(actor_name)
-	var goal: Landmark = get_landmark(goal_id)
+func moves(actor_name: String, goal_name: String):
+	var actor: Actor = get_actor(actor_name)
+	var goal: Landmark = get_landmark(goal_name)
 	Inkleton.block()
 	await actor.move_to(goal.global_position)
 	Inkleton.unblock()
 
-func act(body: String):
-	pass
-
-func controls(body: String):
+func controls(setting: String):
 	var player = get_actor("P")
 	if !player:
 		return
-	match body.to_lower():
+	match setting.to_lower():
 		"yes", "on", "true":
 			player.unblock()
 		"no", "off", "false":

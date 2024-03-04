@@ -18,9 +18,9 @@ func _ready():
 func fire(body: Node2D, entered: bool):
 	if !((entered && !on_exit) || (!entered && on_exit)):
 		return;
-	if !(body.get_parent() is Character):
+	if !(body.get_parent() is Actor):
 		return;
-	var player: Character = body.get_parent();
+	var player: Actor = body.get_parent();
 	if !player.is_in_group("Player"):
 		return
 	if Inkleton.current_choices == [] && block_player_until_available:

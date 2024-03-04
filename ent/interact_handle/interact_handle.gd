@@ -28,20 +28,36 @@ func choices(choices: Array):
 		return
 	choice_index = matching[0].Index
 	choice_is_present = true
+	# Our choice is here, wake up
 	set_process(true)
+
+func fire(body: PhysicsBody2D, entered: bool):
+	var player: Actor = body.get_parent();
+	if !player.is_in_group("Player"):
+		return
+	player_is_in_region = entered
+	if player_is_in_region:
+		# The player is here, wake up
+		set_process(true)
 
 func _process(delta):
 	if !player:
+		# Try to find the player
 		player = Actors.get_actor("P")
 	if !player:
+		# If we couldn't find them, go to sleep
 		set_process(false)
 		return
+	# If we shouldn't be visible, hide and go to sleep.
 	if not (player_is_in_region and choice_is_present):
 		set_process(false)
 		hide()
 		return
 	show()
-	# This is awful
+	# This is like O(n^2*log(n)) but there won't be too many handles available
+	# at one time so it's probably fine to avoid adding extra complexity
+	# Essentially, each handle finds the closest active handle, and if it isn't
+	# this one, hide.
 	var handles = get_tree() \
 		.get_nodes_in_group("InteractHandle") \
 		.filter(func(n):
@@ -55,17 +71,11 @@ func _process(delta):
 		%Label.hide()
 		%Sprite2D.modulate = Color(1, 1, 1, 0.5)
 		return
+	# Show up and check whether we need to be active
 	%Label.show()
 	%Sprite2D.modulate = Color.WHITE
+	# Only let the player activate us if they're allowed to move
 	if player.blockers == 0 and Input.is_action_just_pressed("ui_accept"):
 		Inkleton.story.ChooseChoiceIndex(choice_index)
 		Inkleton.unblock()
 		set_process(false)
-
-func fire(body: PhysicsBody2D, entered: bool):
-	var player: Character = body.get_parent();
-	if !player.is_in_group("Player"):
-		return
-	player_is_in_region = entered
-	if player_is_in_region:
-		set_process(true)

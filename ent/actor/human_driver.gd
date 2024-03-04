@@ -1,5 +1,5 @@
-extends CharacterDriver
-class_name HumanCharacterDriver
+extends ActorDriver
+class_name HumanActorDriver
 
 @export var affected_by_directive = "Controls"
 

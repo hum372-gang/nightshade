@@ -1,4 +1,4 @@
-class_name CharacterDriver
+class_name ActorDriver
 extends Node
 
 func bypasses_control_setting() -> bool:
@@ -16,9 +16,9 @@ func control() -> Vector2:
 func absolute() -> Vector2:
 	return Vector2.INF
 
-func character() -> Node:
+func actor() -> Node:
 	var c = get_parent()
-	while not c is Character:
+	while not c is Actor:
 		c = c.get_parent()
 	return c
 

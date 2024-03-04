@@ -1,18 +1,18 @@
 extends Node2D
-class_name Character
+class_name Actor
 
 var new_action = 0
 var action = false
 var absolute = Vector2.INF
 var control = Vector2.ZERO
-var last_driver: CharacterDriver
+var last_driver: ActorDriver
 
 @export var speed = 250.0
 @export var aspect = 0.75
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
 @export var id = "Actor"
 
-signal changed_driver(old: CharacterDriver, new: CharacterDriver)
+signal changed_driver(old: ActorDriver, new: ActorDriver)
 
 func _ready():
 	agent.path_desired_distance = 4.0
@@ -21,7 +21,7 @@ func _ready():
 func _physics_process(delta):
 	# Update controls
 	var driver = get_children().filter(func (d):
-		return d is CharacterDriver and not (blockers > 0 and not d.bypasses_control_setting())
+		return d is ActorDriver and not (blockers > 0 and not d.bypasses_control_setting())
 	)
 	if not driver.is_empty():
 		driver.sort_custom(func(a, b): return a.priority()>b.priority())

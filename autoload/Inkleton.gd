@@ -11,8 +11,8 @@ signal choices(choices: Array)
 signal directive(type: String, content: String, tags: Array[String])
 
 func _ready():
+	# Start blocked so that the game has a chance to start the story
 	block()
-	#story = preload("res://ink/game.ink")
 
 func block():
 	blockers += 1
@@ -25,6 +25,7 @@ func unblock():
 
 func _process(_delta):
 	if blockers > 0:
+		set_process(false)
 		return
 	current_choices = []
 	while story.GetCanContinue():

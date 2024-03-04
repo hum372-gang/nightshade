@@ -44,7 +44,7 @@ movie_writer/movie_file="/home/willow/Code/orphanage/movie.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotInk/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [rendering]
 

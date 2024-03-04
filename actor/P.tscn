@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://co2r6wr2k5uc7"]
 
-[ext_resource type="PackedScene" uid="uid://dccdhsbw8syal" path="res://ent/character/Character.tscn" id="1_6i7e1"]
+[ext_resource type="PackedScene" uid="uid://dccdhsbw8syal" path="res://ent/actor/Actor.tscn" id="1_6i7e1"]
 [ext_resource type="Texture2D" uid="uid://jj01j4pc7j0" path="res://icon.png" id="2_41yvy"]
-[ext_resource type="Script" path="res://ent/character/human_driver.gd" id="3_u3fe7"]
-[ext_resource type="Script" path="res://ent/character/path_goal_driver.gd" id="4_gutcx"]
+[ext_resource type="Script" path="res://ent/actor/human_driver.gd" id="3_u3fe7"]
+[ext_resource type="Script" path="res://ent/actor/path_goal_driver.gd" id="4_gutcx"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="5_avbit"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yx2dr"]
