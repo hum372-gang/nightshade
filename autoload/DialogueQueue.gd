@@ -46,23 +46,23 @@ func _process(_delta):
 				print("TODO")
 				await spoken.handle_message("P", "(WRITTEN) "+message.body, message.tags)
 			["Thought", var target]:
-				# Shut off spoken messages if we're currently showing one.
-				spoken.change_target(null)
 				# If it's async, don't bother waiting for it to finish.
 				# This has to be a branch, since Godot doesn't let us store
 				# awaitables in variables yet.
 				if "async" in message.tags:
 					thought(target, message.body, message.tags)
 				else:
+					# Shut off spoken messages if we're currently showing one.
+					await spoken.change_target(null)
 					await thought(target, message.body, message.tags)
 			["Thought"]:
 				# Separate branch for implicit player thoughts.
 				# This probably doesn't need to exist, but I don't know enough
 				# about Godot's match syntax to DRY it up.
-				spoken.change_target(null)
 				if "async" in message.tags:
 					thought("P", message.body, message.tags)
 				else:
+					await spoken.change_target(null)
 					await thought("P", message.body, message.tags)
 			[var character]:
 				await spoken.handle_message(character, message.body, message.tags)
@@ -77,7 +77,7 @@ func _process(_delta):
 	since_last_message += 1
 	if since_last_message > 3:
 		set_process(false)
-		spoken.change_target(null)
+		await spoken.change_target(null)
 
 func thought(target, text, tags):
 	# Set up the 

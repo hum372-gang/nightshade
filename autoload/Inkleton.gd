@@ -41,7 +41,9 @@ func _process(_delta):
 			print(type,": ",body)
 			emit_signal("directive", type, body, tags)
 		if blockers > 0:
+			set_process(false)
 			return
+	block()
 	var them = story.GetCurrentChoices()
 	if !them:
 		return
@@ -49,4 +51,3 @@ func _process(_delta):
 		print("> ", choice.Text)
 	choices.emit(them)
 	current_choices = them;
-	block()

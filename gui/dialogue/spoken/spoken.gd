@@ -13,9 +13,13 @@ func _process(delta):
 	update_pointer()
 	pass
 
+var transitioning = false
+
 func change_target(to: Node2D):
 	if !tween:
 		return
+	while transitioning:
+		await get_tree().process_frame
 	if target_actor == to:
 		return
 	tween.kill()
@@ -28,12 +32,16 @@ func change_target(to: Node2D):
 		tween.tween_property(%Control, "modulate", Color.WHITE, 0.25)
 		tween.tween_property(self, "max_fraction", 1.0, 0.5)
 		tween.play()
+		transitioning = true
 		await tween.finished
+		transitioning = false
 	elif to == null:
 		tween.tween_property(self, "max_fraction", 0.0, 0.25)
-		tween.tween_property(%Control, "modulate", Color.TRANSPARENT, 0.5)
+		tween.tween_property(%Control, "modulate", Color.TRANSPARENT, 0.25)
 		tween.play()
+		transitioning = true
 		await tween.finished
+		transitioning = false
 		%Control.hide()
 		target_actor = to
 	else:
@@ -41,7 +49,9 @@ func change_target(to: Node2D):
 		tween.tween_callback(func(): target_actor = to)
 		tween.tween_property(self, "max_fraction", 1.0, 0.5)
 		tween.play()
+		transitioning = true
 		await tween.finished
+		transitioning = false
 
 func update_pointer():
 	if target_actor == null:
@@ -59,8 +69,11 @@ func update_pointer():
 
 func handle_message(actor: String, text: String, _tags: Array[String]):
 	var actor_node = Actors.get_actor(actor)
+	while transitioning:
+		await get_tree().process_frame
 	change_target(actor_node)
 	%RichTextLabel.text = text
+	%RichTextLabel.visible_characters = 0
 	if "remark" in _tags:
 		%Button.hide()
 	else:
