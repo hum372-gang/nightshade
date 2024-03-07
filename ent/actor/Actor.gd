@@ -55,6 +55,7 @@ func _physics_process(delta):
 		agent.target_position = global_position + (control * 10)
 		input_len = control.length() * clamp(0, control.normalized().dot(real_control.normalized()), 1)
 	real_control = real_control.normalized() * min(real_control.length(), input_len * speed * delta)
+	control = real_control
 	global_position += real_control * Vector2(1, aspect)
 
 var blockers = 0

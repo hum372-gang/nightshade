@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl2dab62r0lvd"]
+
+[ext_resource type="Texture2D" uid="uid://c0r7em27v6meu" path="res://gfx/actor/P.png" id="1_nbhei"]
+[ext_resource type="Script" path="res://ent/actor/CharacterSprite.gd" id="2_t0hrs"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, -42)
+scale = Vector2(3, 3)
+texture = ExtResource("1_nbhei")
+hframes = 4
+vframes = 5
+region_rect = Rect2(0, 0, 127.096, 32)
+script = ExtResource("2_t0hrs")
