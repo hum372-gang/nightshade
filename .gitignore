@@ -21,3 +21,7 @@ mono_crash.*.json
 /blade-ink-rs
 /Cargo.*
 /target
+
+# Licensed asset package
+/gfx/licensed
+.secret.env
