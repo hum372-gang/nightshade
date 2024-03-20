@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://co2r6wr2k5uc7"]
+[gd_scene load_steps=9 format=3 uid="uid://co2r6wr2k5uc7"]
 
 [ext_resource type="PackedScene" uid="uid://dccdhsbw8syal" path="res://ent/actor/Actor.tscn" id="1_6i7e1"]
 [ext_resource type="Texture2D" uid="uid://jj01j4pc7j0" path="res://icon.png" id="2_41yvy"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://ent/actor/human_driver.gd" id="3_u3fe7"]
 [ext_resource type="Script" path="res://ent/actor/path_goal_driver.gd" id="4_gutcx"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="5_avbit"]
+[ext_resource type="Script" path="res://ent/actor/interact_watcher.gd" id="7_mlda4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yx2dr"]
 radius = 20.0
@@ -51,7 +52,7 @@ follow_parameters/target_offset = Vector2(0, 0)
 follow_parameters/damping = false
 frame_preview = true
 pixel_perfect = true
-limit/draw_limits = false
+limit/draw_limits = true
 limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
@@ -61,3 +62,6 @@ limit/smoothed = false
 tween_parameters = null
 tween_on_load = true
 inactive_update_mode = 0
+
+[node name="InteractWatcher" type="Node2D" parent="." index="7"]
+script = ExtResource("7_mlda4")

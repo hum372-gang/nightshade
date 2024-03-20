@@ -57,7 +57,6 @@ func do_walk_animations() -> Vector2i:
 		-2: "left",
 		1: "down"
 	}.get(angle, "down")
-	print(angle, name)
 	var animation = get_animation(name)
 	if last_animation != animation:
 		if animation.reset_timer:

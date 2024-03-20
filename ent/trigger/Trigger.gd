@@ -11,7 +11,10 @@ var enabled = false;
 func _ready():
 	# Wait a little before we start caring about player movements, to prevent
 	# loading zone oscillation
-	await get_tree().create_timer(0.25).timeout
+	Actors.actor_entered.connect(func(a): if a == "P": self.activate.call_deferred(), CONNECT_ONE_SHOT)
+
+func activate():
+	await get_tree().create_timer(0.5).timeout
 	body_entered.connect(fire.bind(true))
 	body_exited.connect(fire.bind(false))
 
@@ -23,15 +26,17 @@ func fire(body: Node2D, entered: bool):
 	var player: Actor = body.get_parent();
 	if !player.is_in_group("Player"):
 		return
-	if Inkleton.current_choices == [] && block_player_until_available:
+	if player.blockers > 0:
+		return
+	if (not Inkleton.queue.is_empty()) && block_player_until_available:
 		player.block()
-		await Inkleton.choices
+		while not (Inkleton.queue.is_empty() and Inkleton.blockers.is_empty()):
+			await get_tree().process_frame
 		player.unblock()
-	var choices = Inkleton.current_choices
+	var choices = Inkleton.get_choices()
 	var target = choice_type + ": " + choice_name
 	for index in range(len(choices)):
 		if choices[index].Text == target:
-			Inkleton.story.ChooseChoiceIndex(index)
-			Inkleton.unblock()
+			Inkleton.choose_choice(index)
 			return
 	print("Warn: Tried to pick option ", target, " from trigger, but it isn't available.")

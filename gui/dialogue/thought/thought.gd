@@ -20,13 +20,23 @@ func run():
 	tween.play()
 	for i in range(len(text)+1):
 		label.visible_characters = i;
+		if Input.is_action_just_pressed("ui_accept"):
+			finished.emit()
+			queue_free()
 		await get_tree().process_frame
-	await get_tree().create_timer(len(text) / 10).timeout
+	label.visible_characters = len(text)+1;
+	var timer = get_tree().create_timer(len(text) / 10)
+	while timer.time_left != 0:
+		await get_tree().process_frame
+		if Input.is_action_just_pressed("ui_accept"):
+			finished.emit()
+			queue_free()
 	tween = create_tween()
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.5)
 	tween.play()
 	await tween.finished
 	finished.emit()
+	queue_free()
 
 func _process(delta):
 	if !target:
@@ -37,5 +47,3 @@ func _process(delta):
 		to_target = Vector2.RIGHT
 	var correction = to_target.normalized() * distance_error
 	global_position += correction * 0.1
-	if Input.is_action_just_pressed("ui_accept"):
-		finished.emit()

@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://823xafw6t2up"]
+[gd_scene load_steps=15 format=3 uid="uid://823xafw6t2up"]
 
 [ext_resource type="Texture2D" uid="uid://dwv1qt338px2w" path="res://gfx/stolen/dorm.jpg" id="1_3t3yr"]
 [ext_resource type="PackedScene" uid="uid://bpca4d6nfb3rr" path="res://ent/trigger/Door.tscn" id="2_872rf"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_37p6d"]
 [ext_resource type="PackedScene" uid="uid://ddsdl37t8pblo" path="res://ent/landmark/Landmark.tscn" id="4_x0yas"]
 [ext_resource type="PackedScene" uid="uid://bmfueql7hiill" path="res://ent/interact_handle/interact_handle.tscn" id="5_1i0gl"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="6_w7jju"]
+[ext_resource type="Script" path="res://ent/follows_player.gd" id="7_78p3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyt08"]
 size = Vector2(72, 19)
@@ -27,6 +29,12 @@ size = Vector2(211, 168)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qbdu0"]
 size = Vector2(211, 168)
 
+[sub_resource type="Curve2D" id="Curve2D_hxlxu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -4, -360, 0, 0, 0, 0, -2, 370)
+}
+point_count = 2
+
 [node name="Pdorm" type="Node2D"]
 y_sort_enabled = true
 
@@ -38,7 +46,6 @@ texture = ExtResource("1_3t3yr")
 [node name="Door" parent="." instance=ExtResource("2_872rf")]
 position = Vector2(1, 239)
 room = "DormHallway"
-block_player_until_available = false
 choice_type = "Exit"
 choice_name = "door"
 
@@ -53,11 +60,6 @@ id = "door.enter"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_uyt08")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
-script = ExtResource("3_37p6d")
 
 [node name="center" parent="." instance=ExtResource("4_x0yas")]
 position = Vector2(-2, 90)
@@ -148,6 +150,46 @@ Bed"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MyBed"]
 position = Vector2(43, 19)
 shape = SubResource("RectangleShape2D_qbdu0")
+
+[node name="Camera" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Camera"]
+position = Vector2(-3, 0)
+limit_top = -450
+limit_bottom = 450
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera/Camera2D"]
+script = ExtResource("3_37p6d")
+
+[node name="PhantomCamera2D" type="Node2D" parent="Camera"]
+position = Vector2(-3, 0)
+script = ExtResource("6_w7jju")
+priority_override = false
+priority = 3
+zoom = Vector2(1, 1)
+follow_mode = 4
+follow_target = NodePath("../FollowsPlayer")
+follow_path = NodePath("../CameraPath")
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -450
+limit/right = 10000000
+limit/bottom = 450
+limit/limit_node_target = NodePath("")
+limit/smoothed = true
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="FollowsPlayer" type="Node2D" parent="Camera"]
+script = ExtResource("7_78p3w")
+
+[node name="CameraPath" type="Path2D" parent="Camera"]
+curve = SubResource("Curve2D_hxlxu")
 
 [editable path="Door"]
 [editable path="Desk"]

@@ -76,6 +76,10 @@ choice_name = "East"
 position = Vector2(381, 437)
 id = "center"
 
+[node name="CenterLandmark2" parent="." instance=ExtResource("5_pa36d")]
+position = Vector2(381, 437)
+id = "default"
+
 [node name="Door" parent="." instance=ExtResource("5_1t4uq")]
 position = Vector2(1029, 458)
 room = "East"

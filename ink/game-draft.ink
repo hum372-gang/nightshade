@@ -14,7 +14,7 @@ Appears: R rbed
 Act: R sleep_sick
 Controls: no
 Act: P sulk
-Moves: P door.enter
+Move P: door.enter
 Controls: yes
 
 -> walkabout
@@ -22,11 +22,11 @@ Controls: yes
 = fix_washcloth
 Act: P normal
 Controls: no;; Thought: Their washcloth is pretty warm...
-Moves: P door.exit
+Move P: door.exit
 Hide: P;; Sound: hinge
 Sound: running_sink
 Show: P;; Sound: hinge
-Moves: P by_rbed
+Move P: by_rbed
 Sound: rustle;; Wait: 0.5
 Act: R sleep_sick_cool_towel
 Controls: yes
@@ -113,6 +113,13 @@ Thought: it's time for the assembly. #async
 
 + Exit: door
 -
+
+-> HallwayTransition ->
+-> IntroAuditorium
+
+= Auditorium
+Scene: Auditorium
+
 ->DONE
 
 

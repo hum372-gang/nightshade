@@ -67,8 +67,7 @@ func update_pointer():
 		if point.distance_to(position) < 64 or path_progress > max_fraction:
 			break
 
-func handle_message(actor: String, text: String, _tags: Array[String]):
-	var actor_node = Actors.get_actor(actor)
+func handle_message(actor_node: Actor, text: String, _tags: Array[String]):
 	while transitioning:
 		await get_tree().process_frame
 	change_target(actor_node)

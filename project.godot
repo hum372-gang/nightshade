@@ -34,6 +34,10 @@ Actors="*res://autoload/Actors.gd"
 DialogueQueue="*res://autoload/DialogueQueue.gd"
 StoryUtil="*res://autoload/StoryUtil.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 project/assembly_name="NightshadeAcademy"
@@ -45,7 +49,3 @@ movie_writer/movie_file="/home/willow/Code/orphanage/movie.avi"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GodotInk/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
-
-[rendering]
-
-2d/snap/snap_2d_vertices_to_pixel=true
