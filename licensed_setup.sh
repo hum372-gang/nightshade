@@ -13,7 +13,5 @@ cd gfx/licensed
 # It's also trivial to extract the assets we used in the game from the released artifacts,
 # but the license requires us to put at least some effort in to prevent theft.
 wget -Otmp.zip https://u.wolo.dev/~willow/licensed-assets/modern_int_ext.zip
-7z x tmp.zip -omodern "-p$MODERN_PASSWORD"
+echo S | 7z x tmp.zip -omodern "-p$MODERN_PASSWORD"
 rm tmp.zip
-
-touch gfx/licensed/cookie

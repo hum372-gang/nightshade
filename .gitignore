@@ -13,8 +13,14 @@
 .mono/
 data_*/
 mono_crash.*.json
+*.csproj.old
 
 /build
+/node_modules
+/package*.json
+/result
+/godot
+/gdexport
 
 # Ink fuzzing experiments
 /fuzzink
