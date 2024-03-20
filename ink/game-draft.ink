@@ -117,9 +117,14 @@ Thought: it's time for the assembly. #async
 -> HallwayTransition ->
 -> IntroAuditorium
 
-= Auditorium
+= IntroAuditorium
 Scene: Auditorium
 
 ->DONE
+
+= HallwayTransition
+Scene: HallwayTransition
+Wait: 2
+->->
 
 

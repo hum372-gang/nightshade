@@ -5,12 +5,12 @@ var time_since_blocked = 0
 
 func _process(delta):
 	var handles: Array[InteractHandle] = []
-	if handles.is_empty():
-		return
 	# Find all interact handles
 	handles.assign(get_tree()\
 		.get_nodes_in_group("InteractHandle")\
 		.filter(func(n): return n is InteractHandle))
+	if handles.is_empty():
+		return
 	for handle in handles:
 		handle.hide()
 	if (get_parent().blockers > 0)\
