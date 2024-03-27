@@ -37,6 +37,7 @@ func directive(directive):
 		[var a]:
 			spoken(Actors.get_actor(a), body, directive.tags)
 		_: return
+	remove_buttons()
 
 func maybe_hide():
 	var choices: Array = dialogue_choices();
@@ -55,12 +56,18 @@ func dialogue_choices():
 	return Inkleton.get_choices()\
 		.filter(func(c): return c.Text.begins_with("Dialogue: "))
 
+@onready var button_panel = spoken_box.get_node("%DialogueButtonPanel")
+@onready var button_parent = spoken_box.get_node("%DialogueButtonParent")
+
+func remove_buttons():
+	for child in button_parent.get_children():
+		child.disabled = true
+	button_panel.visible = false
+
 func choices():
 	var choices: Array = dialogue_choices();
 	if choices.is_empty():
 		return
-	var button_panel = spoken_box.get_node("%DialogueButtonPanel")
-	var button_parent = spoken_box.get_node("%DialogueButtonParent")
 	for child in button_parent.get_children():
 		child.queue_free()
 	for index in range(len(choices)):
@@ -68,15 +75,17 @@ func choices():
 		var button = Button.new()
 		button.text = choice.Text.trim_prefix("Dialogue: ")
 		button.pressed.connect(func():
-			button_panel.visible = false
+			button.release_focus()
+			remove_buttons()
 			Inkleton.choose_choice(index)
 			maybe_hide())
 		button_parent.add_child(button)
+		if index == 0:
+			button.grab_focus()
 	button_panel.visible = true
 
 func thought(actor: Actor, body: String, async: bool):
 	var thought = preload("res://gui/dialogue/thought/thought.tscn").instantiate()
-	spoken_box.get_node("%DialogueButtonPanel").visible = false
 	Inkleton.block(thought)
 	thought.text = body
 	thought.target = actor
@@ -85,7 +94,6 @@ func thought(actor: Actor, body: String, async: bool):
 
 func spoken(actor: Actor, body: String, tags: Array[String]):
 	var unblock = Inkleton.block(spoken_box)
-	spoken_box.get_node("%DialogueButtonPanel").visible = false
 	await spoken_box.handle_message(actor, body, tags)
 	maybe_hide()
 	unblock.call()

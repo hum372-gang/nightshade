@@ -77,13 +77,16 @@ func handle_message(actor_node: Actor, text: String, _tags: Array[String]):
 		%Button.hide()
 	else:
 		%Button.show()
+	var skipped = false
 	for i in range(len(text)):
 		%RichTextLabel.visible_characters = i
 		if i > 5 && Input.is_action_just_pressed("ui_accept"):
-			break
-		await get_tree().process_frame
+			skipped = true
+		if !skipped or (i%15==0):
+			await get_tree().process_frame
 	%RichTextLabel.visible_characters = len(text)+1
 	if "remark" in _tags:
 		await get_tree().create_timer(1.5).timeout
 	else:
+		%Button.grab_focus()
 		await %Button.pressed

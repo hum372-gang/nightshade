@@ -85,12 +85,14 @@ Thought: That's better.
 - ->walkabout
 
 = maybe_take_notebook
+Controls: no
 * [Dialogue: Take it]
     Thought: I'll handle it carefully.
     -> got_notebook ->
-+ (procrastinated-on-taking-notebook) [Dialogue: Do not]
++ (procrastinated_on_taking_notebook) [Dialogue: Do not]
     Thought: I'll need it eventually, though.
 -
+Controls: yes
 ->->
 
 = initial_letter_from_mom
