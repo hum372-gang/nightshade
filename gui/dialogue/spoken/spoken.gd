@@ -28,8 +28,8 @@ func change_target(to: Node2D):
 	if prev == null:
 		target_actor = to
 		set_process(true)
-		%Control.show()
-		tween.tween_property(%Control, "modulate", Color.WHITE, 0.25)
+		%DialoguePanel.show()
+		tween.tween_property(%DialoguePanel, "modulate", Color.WHITE, 0.25)
 		tween.tween_property(self, "max_fraction", 1.0, 0.5)
 		tween.play()
 		transitioning = true
@@ -37,12 +37,12 @@ func change_target(to: Node2D):
 		transitioning = false
 	elif to == null:
 		tween.tween_property(self, "max_fraction", 0.0, 0.25)
-		tween.tween_property(%Control, "modulate", Color.TRANSPARENT, 0.25)
+		tween.tween_property(%DialoguePanel, "modulate", Color.TRANSPARENT, 0.25)
 		tween.play()
 		transitioning = true
 		await tween.finished
 		transitioning = false
-		%Control.hide()
+		%DialoguePanel.hide()
 		target_actor = to
 	else:
 		tween.tween_property(self, "max_fraction", 0.0, 0.25)

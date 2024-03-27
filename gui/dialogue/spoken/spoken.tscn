@@ -34,7 +34,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" type="PanelContainer" parent="Control"]
+[node name="DialoguePanel" type="PanelContainer" parent="Control"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
@@ -45,14 +46,14 @@ offset_top = -160.0
 offset_bottom = -16.0
 grow_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/DialoguePanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/DialoguePanel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
@@ -62,34 +63,34 @@ visible_characters = 0
 visible_characters_behavior = 1
 visible_ratio = 0.0
 
-[node name="Control" type="Control" parent="Control/Panel"]
+[node name="Control" type="Control" parent="Control/DialoguePanel"]
 layout_mode = 2
 
-[node name="LineHandle" type="Control" parent="Control/Panel/Control"]
+[node name="LineHandle" type="Control" parent="Control/DialoguePanel/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
 
-[node name="Line2D" type="Line2D" parent="Control/Panel/Control/LineHandle"]
+[node name="Line2D" type="Line2D" parent="Control/DialoguePanel/Control/LineHandle"]
 unique_name_in_owner = true
 position = Vector2(16, 0)
 width = 8.0
 width_curve = SubResource("Curve_yb0hy")
 default_color = Color(1, 1, 1, 0.627451)
 
-[node name="Path2D" type="Path2D" parent="Control/Panel/Control/LineHandle"]
+[node name="Path2D" type="Path2D" parent="Control/DialoguePanel/Control/LineHandle"]
 unique_name_in_owner = true
 position = Vector2(16, 0)
 curve = SubResource("Curve2D_gwbtg")
 
-[node name="Control" type="Control" parent="Control/Panel/Control"]
+[node name="Control" type="Control" parent="Control/DialoguePanel/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
-[node name="Button" type="Button" parent="Control/Panel/Control"]
+[node name="Button" type="Button" parent="Control/DialoguePanel/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -103,3 +104,30 @@ grow_horizontal = 0
 grow_vertical = 0
 shortcut = SubResource("Shortcut_dhhsp")
 text = ">"
+
+[node name="DialogueButtonPanel" type="PanelContainer" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.7
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/DialogueButtonPanel"]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/DialogueButtonPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="DialogueButtonParent" type="VBoxContainer" parent="Control/DialogueButtonPanel/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2

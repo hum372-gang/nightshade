@@ -20,8 +20,10 @@ func applicable(directive):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Inkleton.subscribe(applicable, directive, self)
+	Inkleton.choices.connect(choices)
 	add_child(spoken_box)
-	spoken_box.get_node("%Control").modulate = Color.TRANSPARENT
+	spoken_box.get_node("%DialoguePanel").modulate = Color.TRANSPARENT
+	spoken_box.get_node("%DialogueButtonPanel").hide()
 	set_process(false)
 
 func directive(directive):
@@ -37,8 +39,8 @@ func directive(directive):
 		_: return
 
 func maybe_hide():
-	var dialogue_choices_exist = false;
-	printerr("TODO dialogue choices prevent spoken box from hiding")
+	var choices: Array = dialogue_choices();
+	var dialogue_choices_exist = !choices.is_empty()
 	if Inkleton.queue.is_empty() and not dialogue_choices_exist:
 		spoken_box.change_target(null)
 		return
@@ -49,8 +51,32 @@ func maybe_hide():
 			_: pass
 	spoken_box.change_target(null)
 
+func dialogue_choices():
+	return Inkleton.get_choices()\
+		.filter(func(c): return c.Text.begins_with("Dialogue: "))
+
+func choices():
+	var choices: Array = dialogue_choices();
+	if choices.is_empty():
+		return
+	var button_panel = spoken_box.get_node("%DialogueButtonPanel")
+	var button_parent = spoken_box.get_node("%DialogueButtonParent")
+	for child in button_parent.get_children():
+		child.queue_free()
+	for index in range(len(choices)):
+		var choice = choices[index]
+		var button = Button.new()
+		button.text = choice.Text.trim_prefix("Dialogue: ")
+		button.pressed.connect(func():
+			button_panel.visible = false
+			Inkleton.choose_choice(index)
+			maybe_hide())
+		button_parent.add_child(button)
+	button_panel.visible = true
+
 func thought(actor: Actor, body: String, async: bool):
 	var thought = preload("res://gui/dialogue/thought/thought.tscn").instantiate()
+	spoken_box.get_node("%DialogueButtonPanel").visible = false
 	Inkleton.block(thought)
 	thought.text = body
 	thought.target = actor
@@ -59,6 +85,7 @@ func thought(actor: Actor, body: String, async: bool):
 
 func spoken(actor: Actor, body: String, tags: Array[String]):
 	var unblock = Inkleton.block(spoken_box)
+	spoken_box.get_node("%DialogueButtonPanel").visible = false
 	await spoken_box.handle_message(actor, body, tags)
 	maybe_hide()
 	unblock.call()

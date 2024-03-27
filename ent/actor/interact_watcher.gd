@@ -28,13 +28,15 @@ func _process(delta):
 				if choice.Text == choice_name:
 					return true
 			return false)
+	if active_handles.is_empty():
+		return
 	for handle in active_handles:
 		handle.show()
 		handle.modulate = Color(1, 1, 1, 0.5)
-	handles.sort_custom(func(a, b):
+	active_handles.sort_custom(func(a, b):
 		return (a.global_position.distance_to(self.global_position) \
 		< b.global_position.distance_to(self.global_position)))
-	var handle = handles[0]
+	var handle = active_handles[0]
 	var choice_name = handle.choice_type + ": " + handle.choice_name
 	handle.modulate = Color.WHITE
 	var choices = Inkleton.get_choices()

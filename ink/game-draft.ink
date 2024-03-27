@@ -63,12 +63,12 @@ Thought: That's better.
         - Thought: Their utensils are neatly stowed in a basket, and they have... a rolodex, in this day and age?
         - { not letter_roommate_is_sick: Thought: Their notebook is so nice, too... }
             { letter_roommate_is_sick: 
-                Thought: I found their notebook! It's very nice.
-                -> got_notebook -> 
+                Thought: I found their notebook!
+                -> maybe_take_notebook ->
             }
         - { letter_roommate_is_sick and not got_notebook:
-                Thought: They said I could borrow their notebook. I'll handle it carefully.
-                -> got_notebook ->
+                Thought: They said I could borrow their notebook.
+                -> maybe_take_notebook ->
             }
             { not letter_roommate_is_sick: Thought: I shouldn't snoop. }
     }
@@ -83,6 +83,15 @@ Thought: That's better.
     }
 + -> done_in_room
 - ->walkabout
+
+= maybe_take_notebook
+* [Dialogue: Take it]
+    Thought: I'll handle it carefully.
+    -> got_notebook ->
++ (procrastinated-on-taking-notebook) [Dialogue: Do not]
+    Thought: I'll need it eventually, though.
+-
+->->
 
 = initial_letter_from_mom
 Author's note: Doing my best to write a bad parent
@@ -100,7 +109,7 @@ Written: Thanks so much:
 ->->
 
 = got_notebook
-Get: Notebook
+Get key: Notebook
 Act: P normal
 
 ->->
@@ -119,6 +128,7 @@ Thought: it's time for the assembly. #async
 
 = IntroAuditorium
 Scene: Auditorium
+P: Placeholder; test dialogue choices
 
 ->DONE
 
