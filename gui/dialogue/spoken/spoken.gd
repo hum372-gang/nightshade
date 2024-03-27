@@ -68,6 +68,7 @@ func update_pointer():
 			break
 
 func handle_message(actor_node: Actor, text: String, _tags: Array[String]):
+	var unblock = Inkleton.block(self)
 	while transitioning:
 		await get_tree().process_frame
 	change_target(actor_node)
@@ -90,3 +91,4 @@ func handle_message(actor_node: Actor, text: String, _tags: Array[String]):
 	else:
 		%Button.grab_focus()
 		await %Button.pressed
+	unblock.call()

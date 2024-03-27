@@ -2,10 +2,16 @@
 
 [ext_resource type="Script" path="res://actor/FallbackActor.gd" id="1_h8xmy"]
 
-[node name="Fallback" type="Node2D"]
+[node name="Fallback" type="Node2D" groups=["Actor"]]
 script = ExtResource("1_h8xmy")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "?"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+unique_name_in_owner = true
+avoidance_enabled = true
+radius = 20.0
+debug_enabled = true

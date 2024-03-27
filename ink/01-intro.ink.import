@@ -1,0 +1,16 @@
+[remap]
+
+importer="ink"
+type="Resource"
+uid="uid://pmlk38mcu5ni"
+path="res://.godot/imported/01-intro.ink-b668d41d588926f518b894f2cf4c542a.res"
+
+[deps]
+
+source_file="res://ink/01-intro.ink"
+dest_files=["res://.godot/imported/01-intro.ink-b668d41d588926f518b894f2cf4c542a.res"]
+
+[params]
+
+is_main_file=false
+compress=true

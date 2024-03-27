@@ -88,17 +88,19 @@ func choices():
 
 func thought(actor: Actor, body: String, async: bool):
 	var thought = preload("res://gui/dialogue/thought/thought.tscn").instantiate()
-	Inkleton.block(thought)
+	var unblock = Inkleton.block(thought)
+	if async:
+		unblock.call()
 	thought.text = body
 	thought.target = actor
 	add_child(thought)
 	thought.run()
 
 func spoken(actor: Actor, body: String, tags: Array[String]):
-	var unblock = Inkleton.block(spoken_box)
+	#var unblock = Inkleton.block(spoken_box)
 	await spoken_box.handle_message(actor, body, tags)
 	maybe_hide()
-	unblock.call()
+	#unblock.call()
 
 #func got_directive(type: String, body: String, tags: PackedStringArray):
 	#if (Actors.get_actor(type) == null) \

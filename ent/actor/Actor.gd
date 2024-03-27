@@ -70,6 +70,6 @@ func move_to(pos: Vector2):
 	var driver = get_node("GoalDriver")
 	driver.goal = pos
 	driver.enabled = true
-	while driver.enabled:
+	while driver.enabled and (driver.goal.distance_to(global_position) > 1):
 		await get_tree().process_frame
 	print("OK")

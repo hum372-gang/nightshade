@@ -32,7 +32,9 @@ func mk_actor(name: String):
 	var actor: PackedScene = load("res://actor/"+name+".tscn")
 	if !actor:
 		actor = load("res://actor/Fallback.tscn")
-	return actor.instantiate()
+	var actor_node = actor.instantiate()
+	actor_node.id = name
+	return actor_node
 
 func get_actor(name: String):
 	var actors = get_tree().get_nodes_in_group("Actor")

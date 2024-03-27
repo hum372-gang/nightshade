@@ -1,0 +1,16 @@
+[remap]
+
+importer="ink"
+type="Resource"
+uid="uid://dk7qx5cqqgys"
+path="res://.godot/imported/00-letters.ink-6ef94b09219354e65f96e16737445463.res"
+
+[deps]
+
+source_file="res://ink/00-letters.ink"
+dest_files=["res://.godot/imported/00-letters.ink-6ef94b09219354e65f96e16737445463.res"]
+
+[params]
+
+is_main_file=false
+compress=true

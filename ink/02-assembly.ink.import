@@ -1,0 +1,16 @@
+[remap]
+
+importer="ink"
+type="Resource"
+uid="uid://cwnf12g03la63"
+path="res://.godot/imported/02-assembly.ink-0cf50675a338ae00d9d42e7932176c70.res"
+
+[deps]
+
+source_file="res://ink/02-assembly.ink"
+dest_files=["res://.godot/imported/02-assembly.ink-0cf50675a338ae00d9d42e7932176c70.res"]
+
+[params]
+
+is_main_file=false
+compress=true
