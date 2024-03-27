@@ -25,7 +25,7 @@ func run():
 			queue_free()
 		await get_tree().process_frame
 	label.visible_characters = len(text)+1;
-	var timer = get_tree().create_timer(min(2, len(text) / 10))
+	var timer = get_tree().create_timer(max(3, len(text) / 10))
 	while timer.time_left != 0:
 		await get_tree().process_frame
 		if Input.is_action_just_pressed("ui_accept"):

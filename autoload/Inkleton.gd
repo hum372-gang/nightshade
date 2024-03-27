@@ -152,9 +152,9 @@ func emit_queued():
 	var dispatched_counter = 0
 	while not queue.is_empty():
 		if queue[0].block_before:
+			await get_tree().process_frame
 			if not blockers.is_empty():
 				return
-			await get_tree().process_frame
 		var directive = queue.pop_front()
 		var applicable = subscribers.filter(func(s: Subscriber): return s.applicable.call(directive))
 		if len(applicable) != 1:
