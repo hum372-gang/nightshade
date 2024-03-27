@@ -42,7 +42,9 @@ func directive(directive):
 func maybe_hide():
 	var choices: Array = dialogue_choices();
 	var dialogue_choices_exist = !choices.is_empty()
-	if Inkleton.queue.is_empty() and not dialogue_choices_exist:
+	if dialogue_choices_exist:
+		return
+	if Inkleton.queue.is_empty():
 		spoken_box.change_target(null)
 		return
 	for directive in Inkleton.queue:
