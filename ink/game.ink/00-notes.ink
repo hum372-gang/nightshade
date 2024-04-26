@@ -8,6 +8,10 @@
     ->->
 - -> my_notes
 
+= myos_papers_rustle
+{myos_notebook: Sound: papers_rustle}
+->->
+
 = myos_notebook
 Sound: papers_rustle
 + [Dialogue: Bookmarked page]
@@ -33,21 +37,21 @@ Written: Love, Mom
 ->->
 
 = headmistress_name
-Sound: papers_rustle
+-> myos_papers_rustle ->
 Thought: Willow told me that the Headmistress's name is Madame Guillard.
 ->->
 
 = secrecy
-Sound: papers_rustle
+-> myos_papers_rustle ->
 Thought: Tania told me that the school is incredibly secretive - none of the students even know where in the world the island is.
 ->->
 
 = headmistress_mob
-Sound: papers_rustle
+-> myos_papers_rustle ->
 Thought: Bri told me the headmistress used to be involved with the mob..!
 ->->
 
 = graduation_rate
-Sound: papers_rustle
+-> myos_papers_rustle ->
 Thought: Cam told me that the graduation rate is 20 percent... {!but I know I'll make it!}
 ->->
