@@ -31,3 +31,6 @@ mono_crash.*.json
 # Licensed asset package
 /gfx/licensed
 .secret.env
+
+/gfx/port/disorganized
+/gfx/Design*
