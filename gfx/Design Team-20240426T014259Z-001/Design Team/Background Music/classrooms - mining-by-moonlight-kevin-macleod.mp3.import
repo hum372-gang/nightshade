@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://31vj0qucwaoa"
+path="res://.godot/imported/classrooms - mining-by-moonlight-kevin-macleod.mp3-d241edcf0bac01f094ac887cc0f4a48a.mp3str"
+
+[deps]
+
+source_file="res://gfx/Design Team-20240426T014259Z-001/Design Team/Background Music/classrooms - mining-by-moonlight-kevin-macleod.mp3"
+dest_files=["res://.godot/imported/classrooms - mining-by-moonlight-kevin-macleod.mp3-d241edcf0bac01f094ac887cc0f4a48a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

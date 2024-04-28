@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cctg23mxi8tkt"
+path="res://.godot/imported/bad ending - friendly-ghost-danijel-zambo.mp3-3d76da34139feb4214d7ac52d66f7342.mp3str"
+
+[deps]
+
+source_file="res://gfx/Design Team-20240426T014259Z-001/Design Team/Background Music/bad ending - friendly-ghost-danijel-zambo.mp3"
+dest_files=["res://.godot/imported/bad ending - friendly-ghost-danijel-zambo.mp3-3d76da34139feb4214d7ac52d66f7342.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

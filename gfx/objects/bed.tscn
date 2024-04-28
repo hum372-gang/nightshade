@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://nv28o37syco7"]
+
+[ext_resource type="Texture2D" uid="uid://cfn22x70oa7se" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Backgrounds-Assets/assets_dorm.png" id="1_8dy4u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1317w"]
+atlas = ExtResource("1_8dy4u")
+region = Rect2(40, 3, 32, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cwh5"]
+atlas = ExtResource("1_8dy4u")
+region = Rect2(7, 48, 32, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4s0s"]
+atlas = ExtResource("1_8dy4u")
+region = Rect2(7, 21, 32, 25)
+
+[node name="Bed" type="Node2D"]
+
+[node name="AssetsDorm" type="Sprite2D" parent="."]
+position = Vector2(-16, -36)
+texture = SubResource("AtlasTexture_1317w")
+centered = false
+
+[node name="AssetsDorm2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 25)
+texture = SubResource("AtlasTexture_3cwh5")
+offset = Vector2(0, -14)
+
+[node name="AssetsDorm3" type="Sprite2D" parent="."]
+position = Vector2(0, 25)
+texture = SubResource("AtlasTexture_l4s0s")
+offset = Vector2(0, -12.5)

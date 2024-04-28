@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckblf46kyyfin"]
+
+[ext_resource type="PackedScene" uid="uid://dccdhsbw8syal" path="res://ent/actor/Actor.tscn" id="1_5dou0"]
+[ext_resource type="Texture2D" uid="uid://btklipimnqttn" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Backgrounds-Assets/alarmclock.png" id="2_nc6sk"]
+[ext_resource type="PackedScene" uid="uid://bmfueql7hiill" path="res://ent/interact_handle/interact_handle.tscn" id="3_jheej"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx03c"]
+atlas = ExtResource("2_nc6sk")
+region = Rect2(2, 7, 28, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j34wj"]
+radius = 48.0
+
+[node name="Character" instance=ExtResource("1_5dou0")]
+
+[node name="Alarmclock" type="Sprite2D" parent="." index="1"]
+position = Vector2(-14, -10)
+texture = SubResource("AtlasTexture_dx03c")
+centered = false
+
+[node name="InteractHandle" parent="." index="2" instance=ExtResource("3_jheej")]
+choice_name = "AlarmClock"
+
+[node name="Sprite2D" parent="InteractHandle/Control" index="0"]
+custom_minimum_size = Vector2(0, 0)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+stretch_mode = 0
+
+[node name="Label" parent="InteractHandle/Control" index="1"]
+offset_top = 8.0
+offset_bottom = 31.0
+text = "Alarm Clock"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractHandle" index="1"]
+shape = SubResource("CircleShape2D_j34wj")
+
+[editable path="InteractHandle"]

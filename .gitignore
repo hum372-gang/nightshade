@@ -33,4 +33,3 @@ mono_crash.*.json
 .secret.env
 
 /gfx/port/disorganized
-/gfx/Design*

@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=3 uid="uid://0vxhildoioj1"]
+
+[ext_resource type="Texture2D" uid="uid://u1eo8l74h7t3" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Backgrounds-Assets/background_hallway.png" id="1_khw5y"]
+[ext_resource type="Texture2D" uid="uid://bajl5tjlm2eyo" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Backgrounds-Assets/background_hallway_no lockers.png" id="2_8x84d"]
+[ext_resource type="Script" path="res://ent/follows_player.gd" id="3_fvoyy"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="4_e74q6"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_5x5ea"]
+[ext_resource type="PackedScene" uid="uid://bpca4d6nfb3rr" path="res://ent/trigger/Door.tscn" id="6_xjq23"]
+[ext_resource type="Texture2D" uid="uid://b6dx8lxaoagfm" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Backgrounds-Assets/assets_class_labels.png" id="7_gcil6"]
+
+[sub_resource type="Curve2D" id="Curve2D_i0etm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -368, 0, 0, 0, 0, 0, 1696, 0)
+}
+point_count = 2
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cy1rj"]
+vertices = PackedVector2Array(-490, -74, -392, -74, -392, -54, 384, -54, 384, -74, 490, -74, 490, -94, 526, -94, 526, -74, 746, -74, 746, -94, 782, -94, 782, -74, 1762, -74, 1762, -94, 1798, -94, 1798, -74, 1894, -74, 1894, 192, -622, 192, -622, -74, -526, -74, -490, -94, -526, -94)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(13, 16, 19), PackedInt32Array(12, 13, 19), PackedInt32Array(9, 12, 19), PackedInt32Array(8, 9, 19), PackedInt32Array(5, 8, 19, 3), PackedInt32Array(2, 3, 19), PackedInt32Array(2, 19, 20, 21), PackedInt32Array(0, 2, 21), PackedInt32Array(22, 0, 21, 23)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-632, -84, -632, 202, 1904, 202, 1904, -84, 1808, -84, 1808, -104, 1752, -104, 1752, -84, 792, -84, 792, -104, 736, -104, 736, -84, 536, -84, 536, -104, 480, -104, 480, -84, 374, -84, 374, -64, -382, -64, -382, -84, -480, -84, -480, -104, -536, -104, -536, -84)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfaa6"]
+size = Vector2(56, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fiut6"]
+atlas = ExtResource("7_gcil6")
+region = Rect2(1, 24, 139, 28)
+
+[node name="Hallway" type="Node2D"]
+
+[node name="BackgroundHallway" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_khw5y")
+
+[node name="BackgroundHallwayNoLockers" type="Sprite2D" parent="."]
+position = Vector2(1272, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("2_8x84d")
+
+[node name="FollowsPlayer" type="Node2D" parent="."]
+script = ExtResource("3_fvoyy")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(6.19888e-06, 0)
+script = ExtResource("4_e74q6")
+priority_override = false
+priority = 0
+zoom = Vector2(1, 1)
+follow_mode = 4
+follow_target = NodePath("../FollowsPlayer")
+follow_path = NodePath("../Path2D")
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(6.19888e-06, 0)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("5_5x5ea")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_i0etm")
+
+[node name="NavigationObstacle2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_cy1rj")
+
+[node name="Door" parent="." instance=ExtResource("6_xjq23")]
+position = Vector2(-508, -88)
+room = "P_Dorm"
+choice_type = "Exit"
+choice_name = "Dorm"
+
+[node name="Entrance" parent="Door" index="1"]
+position = Vector2(0, 26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_xfaa6")
+
+[node name="Door2" parent="." instance=ExtResource("6_xjq23")]
+position = Vector2(764, -88)
+room = "Homeroom"
+choice_type = "Exit"
+choice_name = "Homeroom"
+
+[node name="Entrance" parent="Door2" index="1"]
+position = Vector2(0, 26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_xfaa6")
+
+[node name="HomeroomLabel" type="Sprite2D" parent="."]
+position = Vector2(764, -290)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_fiut6")
+
+[editable path="Door"]
+[editable path="Door2"]

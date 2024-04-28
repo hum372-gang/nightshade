@@ -1,0 +1,16 @@
+[remap]
+
+importer="ink"
+type="Resource"
+uid="uid://b38tor28d7sna"
+path="res://.godot/imported/00-header.ink-cc3a7d28a691d80abe51934868bcdf90.res"
+
+[deps]
+
+source_file="res://ink/game.ink/00-header.ink"
+dest_files=["res://.godot/imported/00-header.ink-cc3a7d28a691d80abe51934868bcdf90.res"]
+
+[params]
+
+is_main_file=true
+compress=true

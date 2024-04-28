@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://865t108lr626"]
+
+[ext_resource type="PackedScene" uid="uid://dccdhsbw8syal" path="res://ent/actor/Actor.tscn" id="1_g5l63"]
+[ext_resource type="Texture2D" uid="uid://1ajsg3lk4cpt" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Characters/students/sick_roommate-0.png" id="2_ul4fv"]
+[ext_resource type="PackedScene" uid="uid://bmfueql7hiill" path="res://ent/interact_handle/interact_handle.tscn" id="3_txpiu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qs5cb"]
+radius = 52.0384
+
+[node name="Character" instance=ExtResource("1_g5l63")]
+
+[node name="SickRoommate-0" type="Sprite2D" parent="." index="1"]
+position = Vector2(0, -32)
+scale = Vector2(0.333, 0.333)
+texture = ExtResource("2_ul4fv")
+
+[node name="InteractHandle" parent="." index="2" instance=ExtResource("3_txpiu")]
+choice_type = "Talk"
+choice_name = "Myo"
+
+[node name="Sprite2D" parent="InteractHandle/Control" index="0"]
+custom_minimum_size = Vector2(0, 0)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Label" parent="InteractHandle/Control" index="1"]
+offset_top = -82.0
+offset_bottom = -59.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractHandle" index="1"]
+shape = SubResource("CircleShape2D_qs5cb")
+
+[editable path="InteractHandle"]

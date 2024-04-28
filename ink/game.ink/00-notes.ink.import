@@ -1,0 +1,16 @@
+[remap]
+
+importer="ink"
+type="Resource"
+uid="uid://da38ium0uxpdd"
+path="res://.godot/imported/00-notes.ink-2d38a5def0e04f5bcc80fc5ab5234f72.res"
+
+[deps]
+
+source_file="res://ink/game.ink/00-notes.ink"
+dest_files=["res://.godot/imported/00-notes.ink-2d38a5def0e04f5bcc80fc5ab5234f72.res"]
+
+[params]
+
+is_main_file=false
+compress=true

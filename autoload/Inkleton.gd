@@ -131,6 +131,8 @@ func get_choices():
 func tick():
 	while story.GetCanContinue():
 		var line = story.Continue().strip_edges(true, true)
+		if line == "":
+			continue
 		var tags = story.GetCurrentTags()
 		var group = Array(line.split(";;"))
 		var directive_group = Array(group).map(func(directive_string: String):
@@ -156,6 +158,8 @@ func emit_queued():
 			if not blockers.is_empty():
 				return
 		var directive = queue.pop_front()
+		if directive == null:
+			continue
 		var applicable = subscribers.filter(func(s: Subscriber): return s.applicable.call(directive))
 		if len(applicable) != 1:
 			printerr("WARN: ", str(len(applicable)), " subscribers want directive ", " ".join(directive.verb), ": ", " ".join(directive.body))

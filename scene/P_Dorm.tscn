@@ -1,0 +1,167 @@
+[gd_scene load_steps=12 format=3 uid="uid://c4p4fifvhbfg"]
+
+[ext_resource type="Texture2D" uid="uid://cef3iccri7au4" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Backgrounds-Assets/background_dorm.png" id="1_vpna6"]
+[ext_resource type="Texture2D" uid="uid://cfn22x70oa7se" path="res://gfx/Design Team-20240426T014259Z-001/Design Team/Backgrounds-Assets/assets_dorm.png" id="2_40r1h"]
+[ext_resource type="PackedScene" uid="uid://nv28o37syco7" path="res://gfx/objects/bed.tscn" id="2_rq30n"]
+[ext_resource type="PackedScene" uid="uid://ddsdl37t8pblo" path="res://ent/landmark/Landmark.tscn" id="3_fykv5"]
+[ext_resource type="PackedScene" uid="uid://bpca4d6nfb3rr" path="res://ent/trigger/Door.tscn" id="4_yuakq"]
+[ext_resource type="PackedScene" uid="uid://bmfueql7hiill" path="res://ent/interact_handle/interact_handle.tscn" id="5_cqyt2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ukkg"]
+atlas = ExtResource("2_40r1h")
+region = Rect2(147, 43, 30, 35)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8a5wt"]
+radius = 74.4312
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rlei"]
+size = Vector2(116, 8)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fqxmp"]
+vertices = PackedVector2Array(-172, 32, -172, -46, -167, -44, 170, 36, 176, 36, 176, 44, 48, 238, 238, 83, 238, 238, 194, 79, 48, 256, -48, 256, -48, 238, -238, 238, -238, 83, -192, 80, -174, 44, -174, 32, -116, -44, -116, -54, 170, -54)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 6, 9), PackedInt32Array(6, 10, 11, 12), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 0), PackedInt32Array(18, 19, 20, 3, 6, 12), PackedInt32Array(0, 2, 18), PackedInt32Array(5, 9, 6), PackedInt32Array(18, 12, 15, 16), PackedInt32Array(18, 16, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-182, -64, -164, -54, -126, -54, -126, -64, 180, -64, 180, 26, 188, 26, 186, 32, 186, 42, 200, 70, 248, 74, 248, 248, 58, 248, 58, 266, -58, 266, -58, 248, -248, 248, -248, 74, -198, 70, -184, 42, -184, 32, -188, 22, -182, 22)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p470"]
+atlas = ExtResource("2_40r1h")
+region = Rect2(141, 19, 19, 20)
+
+[node name="PDorm" type="Node2D"]
+y_sort_enabled = true
+
+[node name="BackgroundDorm" type="Sprite2D" parent="."]
+position = Vector2(-256, -256)
+scale = Vector2(2, 2)
+texture = ExtResource("1_vpna6")
+centered = false
+
+[node name="R_Bed" parent="." instance=ExtResource("2_rq30n")]
+position = Vector2(212, -48)
+scale = Vector2(2, 2)
+
+[node name="AssetsDorm2" parent="R_Bed" index="1"]
+visible = true
+z_index = 1
+
+[node name="AssetsDorm3" parent="R_Bed" index="2"]
+visible = false
+z_index = 1
+
+[node name="Landmark" parent="R_Bed" instance=ExtResource("3_fykv5")]
+position = Vector2(0, 16)
+id = "R_Bed"
+
+[node name="P_Bed" parent="." instance=ExtResource("2_rq30n")]
+position = Vector2(-214, -52)
+scale = Vector2(2, 2)
+
+[node name="AssetsDorm2" parent="P_Bed" index="1"]
+visible = true
+
+[node name="AssetsDorm3" parent="P_Bed" index="2"]
+visible = false
+
+[node name="Landmark" parent="P_Bed" instance=ExtResource("3_fykv5")]
+position = Vector2(29, 13)
+id = "P_Bed"
+
+[node name="P_Desk" type="Sprite2D" parent="."]
+position = Vector2(-244, 2)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_5ukkg")
+centered = false
+
+[node name="InteractHandle" parent="P_Desk" instance=ExtResource("5_cqyt2")]
+position = Vector2(16, 17)
+scale = Vector2(0.5, 0.5)
+choice_name = "P_Desk"
+
+[node name="Sprite2D" parent="P_Desk/InteractHandle/Control" index="0"]
+custom_minimum_size = Vector2(0, 0)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Label" parent="P_Desk/InteractHandle/Control" index="1"]
+offset_top = -14.0
+offset_bottom = 9.0
+text = "My Desk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_Desk/InteractHandle"]
+shape = SubResource("CircleShape2D_8a5wt")
+
+[node name="R_Desk" type="Sprite2D" parent="."]
+position = Vector2(186, 2)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_5ukkg")
+centered = false
+flip_h = true
+
+[node name="InteractHandle2" parent="R_Desk" instance=ExtResource("5_cqyt2")]
+position = Vector2(17, 17)
+scale = Vector2(0.5, 0.5)
+choice_name = "R_Desk"
+
+[node name="Sprite2D" parent="R_Desk/InteractHandle2/Control" index="0"]
+custom_minimum_size = Vector2(0, 0)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Label" parent="R_Desk/InteractHandle2/Control" index="1"]
+offset_left = -22.0
+offset_top = -26.0
+offset_right = 23.0
+offset_bottom = 23.0
+text = "Myo's
+Desk"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="R_Desk/InteractHandle2"]
+shape = SubResource("CircleShape2D_8a5wt")
+
+[node name="Door" parent="." instance=ExtResource("4_yuakq")]
+position = Vector2(0, 254)
+room = "Hallway"
+choice_type = "Exit"
+choice_name = "South"
+
+[node name="Exit" parent="Door" index="0"]
+position = Vector2(0, -24)
+
+[node name="Entrance" parent="Door" index="1"]
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_1rlei")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_fqxmp")
+
+[node name="default" parent="." instance=ExtResource("3_fykv5")]
+position = Vector2(0, -1)
+id = "default"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BedsideTable" type="Sprite2D" parent="."]
+position = Vector2(-162, -90)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_2p470")
+centered = false
+
+[node name="AlarmClock" parent="BedsideTable" instance=ExtResource("3_fykv5")]
+position = Vector2(9, 5)
+scale = Vector2(0.5, 0.5)
+id = "P_AC"
+
+[editable path="R_Bed"]
+[editable path="P_Bed"]
+[editable path="P_Desk/InteractHandle"]
+[editable path="R_Desk/InteractHandle2"]
+[editable path="Door"]

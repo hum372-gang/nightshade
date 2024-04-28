@@ -49,3 +49,7 @@ movie_writer/movie_file="/home/willow/Code/orphanage/movie.avi"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GodotInk/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnj6r2706dyr8"
+path="res://.godot/imported/puzzles ver 2 - fairytales-danijel-zambo.mp3-08613f079af1b66bd20327513c3a9c08.mp3str"
+
+[deps]
+
+source_file="res://gfx/Design Team-20240426T014259Z-001/Design Team/Background Music/puzzles ver 2 - fairytales-danijel-zambo.mp3"
+dest_files=["res://.godot/imported/puzzles ver 2 - fairytales-danijel-zambo.mp3-08613f079af1b66bd20327513c3a9c08.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

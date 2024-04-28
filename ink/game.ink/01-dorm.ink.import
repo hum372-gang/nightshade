@@ -1,0 +1,16 @@
+[remap]
+
+importer="ink"
+type="Resource"
+uid="uid://jw72u0x0fvch"
+path="res://.godot/imported/01-dorm.ink-08aea82c7fd81ad29d95aa79ad1f709f.res"
+
+[deps]
+
+source_file="res://ink/game.ink/01-dorm.ink"
+dest_files=["res://.godot/imported/01-dorm.ink-08aea82c7fd81ad29d95aa79ad1f709f.res"]
+
+[params]
+
+is_main_file=false
+compress=true

@@ -6,6 +6,9 @@ Enters: P
 
 { appears_in_hallway ? Myo: Enters: Myo Myo_Spot}
 
+->walkabout
+=walkabout
+
 + { allowed_to_visit ? Dorm } [Exit: Dorm]
     -> dorm
 + [Exit: Dorm]
@@ -20,6 +23,4 @@ Enters: P
     Thought: Locked.
 -
 
--> hallway
-
-->TODO
+->walkabout

@@ -1,0 +1,16 @@
+[remap]
+
+importer="ink"
+type="Resource"
+uid="uid://lx33uwu80aqf"
+path="res://.godot/imported/03-homeroom.ink-78306fc7a38998725d494d75c19f3b7f.res"
+
+[deps]
+
+source_file="res://ink/game.ink/03-homeroom.ink"
+dest_files=["res://.godot/imported/03-homeroom.ink-78306fc7a38998725d494d75c19f3b7f.res"]
+
+[params]
+
+is_main_file=false
+compress=true

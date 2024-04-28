@@ -3,6 +3,7 @@ LIST appears_in_homeroom = (Bri), (Cam), (Mya), (Tania), (Verica), (Willow), (Pe
 === homeroom
 Scene: Homeroom
 
+Enters: P
 { appears_in_homeroom ? Bri: Enters: Bri Bri_Spot;; Act Bri: normal_north}
 { appears_in_homeroom ? Cam: Enters: Cam Cam_Spot;; Act Cam: normal_north}
 { appears_in_homeroom ? Mya: Enters: Mya Mya_Spot;; Act Mya: normal_north}
@@ -32,7 +33,7 @@ Appears: Loudspeaker WallMount
 * [Talk: Mya]
     Mya: Why are we here? I hate school.
 * [Talk: Viki]
-    Viki: I don't knowww
+    Verica: I don't knowww
 * [Talk: Pet]
     Pet: Be quiet! Some of us are trying to learn, you know!
 * [Talk: Teacher]
